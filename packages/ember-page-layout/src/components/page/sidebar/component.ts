@@ -1,6 +1,7 @@
 import { getOwner } from '@ember/application';
 import { action } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
+import Router from '@ember/routing/router-service';
 import { scheduleOnce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -8,21 +9,23 @@ import { tracked } from '@glimmer/tracking';
 
 import Layout from 'services/layout';
 
-export interface PageHeaderArgs {
+export interface PageSidebarArgs {
     id?: string;
     empty?: boolean;
     document?: Document;
 }
 
-export interface PageHeaderSignature {
-    Args: PageHeaderArgs;
+export interface PageSidebarSignature {
+    Args: PageSidebarArgs;
     Blocks: { default: []; initial: [] };
 }
-export default class PageHeader extends Component<PageHeaderSignature> {
+
+export default class PageSidebar extends Component<PageSidebarSignature> {
+    @service declare router: Router;
     @service declare layout: Layout;
     @tracked uniqueId: string | null = null;
 
-    constructor(owner: any, args: PageHeaderArgs) {
+    constructor(owner: any, args: PageSidebarArgs) {
         super(owner, args);
         const uniqueId = guidFor(this);
         this.uniqueId = uniqueId;
@@ -30,17 +33,16 @@ export default class PageHeader extends Component<PageHeaderSignature> {
     }
 
     @action
-    addItem(uniqueId: string) {
-        this.layout.headerTree = [...this.layout.headerTree, uniqueId];
+    addItem(item: string) {
+        this.layout.sidebarTree = [...this.layout.sidebarTree, item];
     }
 
     get show() {
-        console.log(this.uniqueId === this.layout.currentHeader);
-        return this.uniqueId === this.layout.currentHeader;
+        return this.uniqueId === this.layout.currentSidebar;
     }
 
     get id() {
-        return this.args.id ?? 'application-header';
+        return this.args.id ?? 'application-sidebar';
     }
 
     get empty() {
@@ -53,6 +55,6 @@ export default class PageHeader extends Component<PageHeaderSignature> {
 
     willDestroy(): void {
         super.willDestroy();
-        this.layout.headerTree = [...this.layout.headerTree.filter((id: string) => id !== this.uniqueId)];
+        this.layout.sidebarTree = [...this.layout.sidebarTree.filter((id) => id !== this.uniqueId)];
     }
 }
