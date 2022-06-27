@@ -7,7 +7,7 @@ import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 
-import Layout from 'services/layout';
+import Layout from '../../services/layout';
 
 export interface PageSidebarArgs {
     id?: string;
@@ -25,13 +25,19 @@ export default class PageSidebar extends Component<PageSidebarSignature> {
     @service declare layout: Layout;
     @tracked uniqueId: string | null = null;
 
-    constructor(owner: any, args: PageSidebarArgs) {
+    constructor(owner: unknown, args: PageSidebarArgs) {
         super(owner, args);
         const uniqueId = guidFor(this);
         this.uniqueId = uniqueId;
         scheduleOnce('afterRender', this, this.addItem, uniqueId);
     }
 
+    /**
+     * Add item to the appropriate service list
+     *
+     * @param {string} item
+     * @memberof PageSidebar
+     */
     @action
     addItem(item: string) {
         this.layout.sidebarTree = [...this.layout.sidebarTree, item];

@@ -6,36 +6,46 @@ import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 
-import Layout from 'services/layout';
+import Layout from '../../services/layout';
 
-export interface PageHeaderArgs {
+export interface PageFooterArgs {
     id?: string;
     empty?: boolean;
     document?: Document;
 }
 
-export interface PageHeaderSignature {
-    Args: PageHeaderArgs;
+export interface PageFooterSignature {
+    Args: PageFooterArgs;
     Blocks: { default: []; initial: [] };
 }
-export default class PageHeader extends Component<PageHeaderSignature> {
+export default class PageHeader extends Component<PageFooterSignature> {
     @service declare layout: Layout;
     @tracked uniqueId: string | null = null;
 
-    constructor(owner: any, args: PageHeaderArgs) {
+    constructor(owner: unknown, args: PageFooterArgs) {
         super(owner, args);
         const uniqueId = guidFor(this);
         this.uniqueId = uniqueId;
         scheduleOnce('afterRender', this, this.addItem, uniqueId);
     }
 
+    /**
+     * Add item to the appropriate service list
+     *
+     * @param {string} uniqueId
+     * @memberof PageHeader
+     */
+    @action
+    addItem(uniqueId: string) {
+        this.layout.footerTree = [...this.layout.footerTree, uniqueId];
+    }
+
     get show() {
-        console.log(this.uniqueId === this.layout.currentHeader);
-        return this.uniqueId === this.layout.currentHeader;
+        return this.uniqueId === this.layout.currentFooter;
     }
 
     get id() {
-        return this.args.id ?? 'application-header';
+        return this.args.id ?? 'application-footer';
     }
 
     get empty() {
@@ -46,13 +56,8 @@ export default class PageHeader extends Component<PageHeaderSignature> {
         return this.args.document ?? (getOwner(this) as any).lookup('service:-document');
     }
 
-    @action
-    addItem(uniqueId: string) {
-        this.layout.headerTree = [...this.layout.headerTree, uniqueId];
-    }
-
     willDestroy(): void {
         super.willDestroy();
-        this.layout.headerTree = [...this.layout.headerTree.filter((id: string) => id !== this.uniqueId)];
+        this.layout.footerTree = [...this.layout.footerTree.filter((id: string) => id !== this.uniqueId)];
     }
 }
