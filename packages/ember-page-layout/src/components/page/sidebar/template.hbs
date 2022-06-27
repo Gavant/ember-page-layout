@@ -1,5 +1,5 @@
 {{#if this.show}}
-    {{#if (has-block "default")}}
+    {{#if (has-block)}}
         <Page::Layout @id={{this.id}} @document={{this.document}} @empty={{this.empty}}>
             <:default>
                 {{yield}}
