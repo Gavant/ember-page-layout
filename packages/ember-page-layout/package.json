@@ -1,13 +1,15 @@
 {
     "name": "@gavant/ember-page-layout",
     "version": "0.0.0",
-    "description": "The default blueprint for Embroider v2 addons.",
+    "description": "Page Layout Component for Ember.js",
     "keywords": [
-        "ember-addon"
+        "ember-addon",
+        "page",
+        "layout"
     ],
     "repository": "https://github.com/Gavant/ember-page-layout",
     "license": "MIT",
-    "author": "",
+    "author": "Gavant Software",
     "files": [
         "addon-main.js",
         "dist"
@@ -55,7 +57,8 @@
         "node": "14.* || 16.* || >= 18"
     },
     "publishConfig": {
-        "registry": "https://registry.npmjs.org"
+        "registry": "https://registry.npmjs.org",
+        "access": "public"
     },
     "ember": {
         "edition": "octane"
