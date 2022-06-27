@@ -1,6 +1,6 @@
 {
     "name": "@gavant/ember-page-layout",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "Page Layout Component for Ember.js",
     "keywords": [
         "ember-addon",
