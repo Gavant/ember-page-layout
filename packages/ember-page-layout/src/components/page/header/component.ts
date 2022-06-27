@@ -29,11 +29,6 @@ export default class PageHeader extends Component<PageHeaderSignature> {
         scheduleOnce('afterRender', this, this.addItem, uniqueId);
     }
 
-    @action
-    addItem(uniqueId: string) {
-        this.layout.headerTree = [...this.layout.headerTree, uniqueId];
-    }
-
     get show() {
         console.log(this.uniqueId === this.layout.currentHeader);
         return this.uniqueId === this.layout.currentHeader;
@@ -49,6 +44,11 @@ export default class PageHeader extends Component<PageHeaderSignature> {
 
     get document() {
         return this.args.document ?? (getOwner(this) as any).lookup('service:-document');
+    }
+
+    @action
+    addItem(uniqueId: string) {
+        this.layout.headerTree = [...this.layout.headerTree, uniqueId];
     }
 
     willDestroy(): void {
