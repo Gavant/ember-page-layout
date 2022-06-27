@@ -1,6 +1,6 @@
 # @gavant/ember-page-layout
 
-[Short description of the addon.]
+This addon is used to change a sidebar/header/footer depending on what page your viewing
 
 ## Compatibility
 
@@ -16,7 +16,22 @@ ember install @gavant/ember-page-layout
 
 ## Usage
 
-[Longer description of how to use the addon in apps.]
+```
+//application template
+<Page::Header::Container>
+
+<Page::Header>Logged in Page Header</Page::Header>
+```
+
+```
+//Logged out Page template
+<Page::Header>Logged Out Page Header</Page::Header>
+```
+
+```
+//Logged in Page template
+//Nothing is needed here as your application page header will render once logged in
+```
 
 ## Contributing
 
