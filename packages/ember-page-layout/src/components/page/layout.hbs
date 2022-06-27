@@ -1,0 +1,7 @@
+{{#if (or (has-block) @empty)}}
+    {{#in-element this.targetElement}}
+        {{#unless @empty}}
+            {{yield}}
+        {{/unless}}
+    {{/in-element}}
+{{/if}}

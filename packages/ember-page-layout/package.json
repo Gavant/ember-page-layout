@@ -1,5 +1,5 @@
 {
-  "name": "ember-page-layout",
+  "name": "@gavant/ember-page-layout",
   "version": "0.0.0",
   "description": "The default blueprint for Embroider v2 addons.",
   "keywords": [
@@ -25,16 +25,20 @@
     "prepare": "yarn build"
   },
   "dependencies": {
-    "@embroider/addon-shim": "^1.0.0"
+    "@embroider/addon-shim": "^1.0.0",
+    "ember-truth-helpers": "^3.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.0",
-    "@babel/eslint-parser": "^7.18.2",
+    "@babel/core": "^7.18.2",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/plugin-proposal-decorators": "^7.17.0",
     "@babel/plugin-syntax-decorators": "^7.17.0",
+    "@babel/plugin-transform-typescript": "^7.16.8",
+    "@babel/preset-typescript": "^7.17.12",
     "@embroider/addon-dev": "^1.0.0",
     "@rollup/plugin-babel": "^5.3.0",
+    "@typescript-eslint/eslint-plugin": "^5.18.0",
+    "@typescript-eslint/parser": "^5.18.0",
     "ember-template-lint": "^4.0.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
@@ -42,7 +46,9 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "npm-run-all": "^4.1.5",
-    "rollup": "^2.67.0"
+    "rollup": "^2.67.0",
+    "rollup-plugin-ts": "^3.0.1",
+    "typescript": "^4.6.3"
   },
   "engines": {
     "node": "14.* || 16.* || >= 18"
@@ -56,11 +62,28 @@
   "ember-addon": {
     "version": 2,
     "type": "addon",
-    "main": "addon-main.js"
+    "main": "addon-main.js",
+    "app-js": {
+      "./components/page/footer.js": "./dist/_app_/components/page/footer.js",
+      "./components/page/footer/container.js": "./dist/_app_/components/page/footer/container.js",
+      "./components/page/header.js": "./dist/_app_/components/page/header.js",
+      "./components/page/header/container.js": "./dist/_app_/components/page/header/container.js",
+      "./components/page/layout.js": "./dist/_app_/components/page/layout.js",
+      "./components/page/sidebar.js": "./dist/_app_/components/page/sidebar.js",
+      "./components/page/sidebar/container.js": "./dist/_app_/components/page/sidebar/container.js",
+      "./index.js": "./dist/_app_/index.js",
+      "./services/layout.js": "./dist/_app_/services/layout.js",
+      "./utils/guard.js": "./dist/_app_/utils/guard.js",
+      "./initializerDefineProperty-bbf9f274.js": "./dist/_app_/initializerDefineProperty-bbf9f274.js",
+      "./applyDecoratedDescriptor-ff18b166.js": "./dist/_app_/applyDecoratedDescriptor-ff18b166.js"
+    }
   },
   "exports": {
     ".": "./dist/index.js",
     "./*": "./dist/*",
     "./addon-main.js": "./addon-main.js"
+  },
+  "volta": {
+    "extends": "../../package.json"
   }
 }
