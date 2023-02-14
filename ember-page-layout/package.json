@@ -1,0 +1,94 @@
+{
+  "name": "@gavant/ember-page-layout",
+  "version": "0.0.1",
+  "description": "Page Layout Component for Ember.js",
+  "keywords": [
+    "ember-addon",
+    "page",
+    "layout"
+  ],
+  "repository": "https://github.com/Gavant/ember-page-layout",
+  "license": "MIT",
+  "author": "Gavant Software",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "rollup --config",
+    "lint": "concurrently 'npm:lint:*(!fix)' --names 'lint:'",
+    "lint:fix": "concurrently 'npm:lint:*:fix' --names 'fix:'",
+    "lint:hbs": "ember-template-lint . --no-error-on-unmatched-pattern",
+    "lint:js": "eslint . --cache",
+    "lint:ts": "glint",
+    "lint:hbs:fix": "ember-template-lint . --fix --no-error-on-unmatched-pattern",
+    "lint:js:fix": "eslint . --fix",
+    "start": "rollup --config --watch",
+    "test": "echo 'A v2 addon does not have tests, run tests in test-app'",
+    "prepublishOnly": "rollup --config"
+  },
+  "dependencies": {
+    "@embroider/addon-shim": "^1.0.0",
+    "ember-truth-helpers": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-proposal-decorators": "^7.17.0",
+    "@babel/plugin-syntax-decorators": "^7.17.0",
+    "@babel/plugin-transform-typescript": "^7.16.8",
+    "@babel/preset-typescript": "^7.17.12",
+    "@embroider/addon-dev": "^1.0.0",
+    "@glint/core": "^0.9.7",
+    "@glint/environment-ember-loose": "^0.9.7",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@typescript-eslint/eslint-plugin": "^5.18.0",
+    "@typescript-eslint/parser": "^5.18.0",
+    "ember-template-lint": "^4.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-ember": "^10.5.8",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^2.67.0",
+    "rollup-plugin-ts": "^3.0.1",
+    "typescript": "^4.6.3"
+  },
+  "engines": {
+    "node": "14.* || 16.* || >= 18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "version": 2,
+    "type": "addon",
+    "main": "addon-main.js",
+    "app-js": {
+      "./components/page/footer.js": "./dist/_app_/components/page/footer.js",
+      "./components/page/footer/container.js": "./dist/_app_/components/page/footer/container.js",
+      "./components/page/header.js": "./dist/_app_/components/page/header.js",
+      "./components/page/header/container.js": "./dist/_app_/components/page/header/container.js",
+      "./components/page/layout.js": "./dist/_app_/components/page/layout.js",
+      "./components/page/sidebar.js": "./dist/_app_/components/page/sidebar.js",
+      "./components/page/sidebar/container.js": "./dist/_app_/components/page/sidebar/container.js",
+      "./glint.js": "./dist/_app_/glint.js",
+      "./index.js": "./dist/_app_/index.js",
+      "./services/layout.js": "./dist/_app_/services/layout.js",
+      "./utils/guard.js": "./dist/_app_/utils/guard.js",
+      "./initializerDefineProperty-b6f88891.js": "./dist/_app_/initializerDefineProperty-b6f88891.js",
+      "./applyDecoratedDescriptor-e87190e7.js": "./dist/_app_/applyDecoratedDescriptor-e87190e7.js"
+    }
+  },
+  "exports": {
+    "./*": "./dist/*",
+    "./addon-main.js": "./addon-main.js"
+  },
+  "volta": {
+    "extends": "../../package.json"
+  }
+}
